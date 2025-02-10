@@ -3,7 +3,63 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>투두리스트</title>
+    <title>TO DO LIST</title>
+    <style>
+      h1 {
+        text-align: center;
+      }
+      ul {
+        list-style-type: none;
+        padding: 0;
+      }
+      li {
+        display: flex;
+        align-items: center;
+        margin: 10px 0;
+      }
+      input[type="text"] {
+        width: 80%;
+        padding: 8px;
+        margin-right: 5px;
+        border-radius: 4px;
+        border: 1px solid #ccc;
+      }
+      input[type="submit"] {
+        padding: 8px 15px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+    </style>
   </head>
-  <body></body>
+  <body>
+    <!-- <script src="main.js"> -->
+    <!-- placeholder 텍스트는 입력 필드가 비어 있을 때 표시되며, 사용자가 입력을 시작하면 사라집니다.-->
+
+    <btn id="addBtn" onclick="addItem()">추가</btn>
+    <ul>
+      <li style="margin: 10px">
+        <input type="text" id="itemInPut" placeholder="add new What to do" />
+        <input type="checkbox" style="margin-right: 10px" />
+        오늘의 할 일 modifyBtn deleteBtn
+        <button style="margin-left: 20px">수정</button>
+        <button style="margin-left: 20px">삭제</button>
+      </li>
+    </ul>
+
+    <script>
+      function addItem() {
+        let input = document.getElementById("itemInPut");
+        let newLi = document.createElement("li");
+        let check = document.createElement("input");
+        check.type = "checkBox";
+        let text = document.createTextNode(input.value);
+        newLi.appendChild(check);
+        newLi.appendChild(text);
+
+        document.querySelector("ul").appendChild(newLi);
+        input.value = "";
+      }
+    </script>
+  </body>
 </html>
