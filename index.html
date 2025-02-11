@@ -36,12 +36,12 @@
     <!-- <script src="main.js"> -->
     <!-- placeholder 텍스트는 입력 필드가 비어 있을 때 표시되며, 사용자가 입력을 시작하면 사라집니다.-->
 
-    <btn id="addBtn" onclick="addItem()">추가</btn>
     <ul>
       <li style="margin: 10px">
-        <input type="text" id="itemInPut" placeholder="add new What to do" />
+        <input type="text" id="itemInPut" placeholder="ADD NEW WHAT TO DO" />
+        <button id="addBtn" onclick="addItem()">추가</button>
         <input type="checkbox" style="margin-right: 10px" />
-        오늘의 할 일 modifyBtn deleteBtn
+
         <button style="margin-left: 20px">수정</button>
         <button style="margin-left: 20px">삭제</button>
       </li>
@@ -51,14 +51,25 @@
       function addItem() {
         let input = document.getElementById("itemInPut");
         let newLi = document.createElement("li");
-        let check = document.createElement("input");
-        check.type = "checkBox";
-        let text = document.createTextNode(input.value);
-        newLi.appendChild(check);
-        newLi.appendChild(text);
-
+        newLi.innerHTML = input.value;
         document.querySelector("ul").appendChild(newLi);
         input.value = "";
+
+        //   let check = document.createElement("input");
+        //   check.type = "checkBox";
+        //   let text = document.createTextNode(input.value);
+
+        //   newLi.appendChild(check);
+        //   newLi.appendChild(text);
+
+        //--------------- 삭제 버튼 만들기 ------------------------
+        let deleteBtn = document.createElement("button");
+        deleteBtn.innerHTML = "삭제";
+        newLi.appendChild(deleteBtn);
+        deleteBtn.addEventListener("click", function () {
+          let ul = document.querySelector("ul");
+          ul.removeChild(nwwLi);
+        });
       }
     </script>
   </body>
