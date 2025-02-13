@@ -106,6 +106,14 @@
           let ul = document.querySelector("ul");
           ul.removeChild(newLi);
         });
+        //--------------- 수정 버튼 만들기 ------------------------//
+        let modifyBtn = document.createElement("button");
+        modifyBtn.innerHTML = "수정";
+        newLi.appendChild(modifyBtn);
+        modifyBtn.addEventListener("click", function () {
+          let ul = document.querySelector("ul");
+          ul.modifyChild(newLi);
+        });
       }
     </script>
   </body>
