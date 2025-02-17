@@ -3,117 +3,216 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TO DO LIST</title>
+    <title>T0 DO LIST</title>
     <style>
-      h1 {
-        text-align: center;
-      }
-      ul {
-        list-style-type: none;
+      /* 배색에 대해서 검색하고 css 결정할 것 */
+      * {
+        box-sizing: border-box;
+        margin: 0;
         padding: 0;
       }
+      /* body {
+              display: flex;
+              flex-direction: column;
+              min-height: 100vh;
+              background-color: rgb(52, 150, 150);
+            } */
+      body {
+        background-image: url(./todo/img/workspace-1280538_1920.jpg);
+
+        background-size: cover;
+        background-position: center;
+        min-height: 100vh;
+        position: relative;
+      }
+      #itemInput {
+        width: 410px;
+        height: 50px;
+        border-radius: 1cqh;
+        border: 2px solid rgb(128, 82, 67);
+        background-color: rgb(254, 199, 111);
+        padding-left: 10px;
+      }
+      /* 모든 브라우저 지원을 위한 placeholder 스타일 */
+      ::placeholder {
+        color: rgb(128, 82, 67);
+      }
+      h1 {
+        margin-bottom: 20px;
+        margin-top: 40px;
+        color: rgb(128, 82, 67);
+        text-decoration-style: double;
+      }
+      ul {
+        /* width: 90%; 전체 너비 사용 */
+        /* ul을 flex 컨테이너로 설정
+               내부 요소를 유연하게 배치할 수 있게 */
+        /* display: flex; */
+        /* 세로 방향 정렬 */
+        padding-left: 40px;
+        columns: rgb(128, 82, 67);
+      }
       li {
+        /* flex 써서 중간정열해보기  */
+        /* 가로배치 */
         display: flex;
+        /* 세로 중앙 정렬 */
         align-items: center;
-        margin: 10px 0;
+        padding: 10px;
+        width: 450px;
+        height: 50px;
+        list-style: none;
+        background-color: rgb(218, 175, 81, 0.5);
+        margin: 10px 5px;
+        gap: 10px;
       }
-      input[id="title"] {
-        width: 80%;
-        padding: 8px;
-        margin-right: 5px;
-        border-radius: 4px;
-        border: 1px solid #ccc;
+      /* 버튼을 감싸는 그룹 */
+      .button-group {
+        display: flex;
+        gap: 10px;
       }
-      input[id="content"] {
-        width: 80%;
-        padding: 8px;
-        margin-right: 5px;
-        border-radius: 4px;
-        border: 1px solid #ccc;
+      /* todo 텍스트를 위한 스타일 */
+      .todo-text {
+        /* 남은 공간을 모두 차지 */
+        overflow: hidden; /* 텍스트가 너무 길 경우 숨김 */
+        /* text-overflow: ellipsis; 텍스트가 넘칠 경우 ...으로 표시 */
+        white-space: nowrap; /* 텍스트 줄바꿈 방지 */
+        text-align: center; /* 텍스트 왼쪽 정렬 */
       }
-      input[id="date"] {
-        width: 80%;
-        padding: 8px;
-        margin-right: 5px;
-        border-radius: 4px;
-        border: 1px solid #ccc;
+      /* 버튼 그룹을 위한 스타일 */
+      .button-group {
+        display: flex;
+        gap: 10px; /* 버튼 사이의 간격 */
+        margin-right: 20px; /* 버튼들을 오른쪽으로 밀기 */
       }
-      input[type="submit"] {
-        padding: 8px 15px;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
+      .box {
+        /* display: flex;
+              justify-content: center; /* 수평 중앙 정렬 */
+        /* align-items: center; 수직 중앙 정렬  */
+        margin-top: 100px;
+        width: 600px;
+        height: 800px;
+        text-align: center;
+
+        padding: 20px;
+        border: solid 5px rgb(197, 155, 44);
+
+        border-radius: 20px;
+        background-color: rgba(255, 255, 255, 0.7);
+        position: absolute;
+        margin-top: 50px;
+        margin-left: 100px;
+      }
+      button {
+        border-radius: 10px;
+        height: 54px;
+        width: 60px;
+        background-color: rgb(128, 82, 67);
+        border: 2px solid rgb(218, 175, 81);
+        color: rgb(251, 254, 255);
       }
     </style>
   </head>
   <body>
-    <!-- <script src="main.js"> -->
-    <!-- placeholder 텍스트는 입력 필드가 비어 있을 때 표시되며, 사용자가 입력을 시작하면 사라집니다.-->
-
-    <div style="margin: 10px">
-      <input type="text" id="title" placeholder="ADD NEW WHAT TO DO" />
-      <input type="text" id="content" placeholder="ADD NEW CONTENT" />
-      <input type="text" id="date" placeholder="ADD NEW DATE" />
-
-      <button id="addBtn" onclick="addItem()">추가</button>
+    <div class="box">
+      <div class="current"></div>
+      <h1>JUST DO IT !</h1>
+      <input type="text" id="itemInput" placeholder="   WHAT TO DO " />
+      <button onclick="addItem()">Add</button>
+      <ul>
+        <!-- <li> -->
+        <!-- 확인용 -->
+        <!-- <input type="checkbox" />
+          <span class="col">안녕</span>
+          <button id="modifybtn">수정</button>
+          <button id="deletebtn">삭제</button> -->
+        <!-- 확인용 -->
+        <!-- </li> -->
+        <!--         
+          <li style="display: flex; align-items: center; gap: 10px;"></li>
+          <span></span><input type="checkbox"></input>
+          <span class="col">안녕</span>
+          <button id="modifybtn">수정1</button>
+          <button id="deletebtn">삭제2</button>
+        </li> -->
+        <!-- <li>
+          <span input type="checkbox"></span>
+          <span class="todo"></span>
+          <span><button id="modifybtn"></button></span>
+          <span><button id="deletebtn"></button></span
+        </li> -->
+      </ul>
     </div>
-    <ul>
-      <input type="checkbox" style="margin-right: 10px" />
-      <button style="margin-left: 20px">수정</button>
-      <button style="margin-left: 20px">삭제</button>
-    </ul>
+
+    <!-- 
+    . input 박스 만들기
+    . input 박스에 입력받은 값으로 li 만들기 function.addItem() -> newli 생성
+    . li에 체크박스 추가 
+    . 체크박스에 기능넣기
+    . li에 수정버튼 추가
+    . li에 삭제버튼 추가
+    . 삭제버튼에 기능넣기
+    . css?
+
+    . title, content, deadline
+    . 업무, 개인, 자기계발, 기타
+    . 날짜, 시계, 날씨, 현재기온
+    -->
     <script>
-      // Dummy Date(임시의 가짜 데이터)
-      // 출력내용 확인용
-      const todos = [
-        { title: "자바스트립트", content: "배열매서드", date: "오늘까지" },
-        { title: "자바스트립트", content: "DOM", date: "내일까지" },
-      ];
-      // 화면에 보여주는 내용
       function addItem() {
-        const todo = { title: "", content: "", date: "" };
-
+        //-----------[ todo 입력하고 li에 추가 ]--------
+        //-----------------변수지정---------------------
+        let input = document.getElementById("itemInput");
+        let newli = document.createElement("li");
         let check = document.createElement("input");
-        check.type = "checkBox";
+        let ul = document.querySelector("ul");
+        check.type = "checkbox";
+        // 체크박스 오른쪽 여백
+        check.style.marginRight = "0";
+        // span 태그사용 -> span 을 변수에 담음
 
-        let input = document.getElementById("title");
-        let newLi = document.createElement("li");
-        newLi.innerHTML = input.value;
-        document.querySelector("ul").appendChild(newLi);
+        //--------------생성한 요소들을 li에 넣기--------
+        let span = document.createElement("span");
+        span.setAttribute("class", "col");
+        // span에 inPutValue를 넣기
+        span.innerHTML = input.value;
+
+        //  input 에서 입력 받은 값인 input.value를 변수inPutValue에 담기
+        let inPutValue = input.value;
+
+        //---------- 수정버튼 만들어 li에 추가-----------
+        let modifybtn = document.createElement("button");
+        modifybtn.innerHTML = "수정";
+        modifybtn.style.marginLeft = "20px";
+
+        modifybtn.addEventListener("click", () => {});
+
+        //---------- 삭제버튼 만들어 li에 추가-----------
+        let deletebtn = document.createElement("button");
+        deletebtn.innerHTML = "삭제";
+        deletebtn.style.marginRight = "10px";
+
+        // newli에 checkbox를 넣기
+        newli.appendChild(check);
+        // newli에 span를 넣기
+        newli.appendChild(span);
+        // newli에 modifybtn를 넣기
+        newli.appendChild(modifybtn);
+        // newli에 deletebtn를 넣기
+        newli.appendChild(deletebtn);
+
+        deletebtn.addEventListener("click", () => {
+          document.querySelector("ul").removeChild(newli);
+        });
+        // checkbox.style.marginRight = "20px";
+        // modifybtn.style.marginLeft = "20px";
+        // deletebtn.style.marginLeft = "10px";
+        // newLi.style.marginBottom = "10px";
+        // newli의 요소들을 uldp 추가
+        ul.appendChild(newli);
+
+        // 입력창 초기화
         input.value = "";
-
-        let input2 = document.getElementById("content");
-        let newLi2 = document.createElement("li");
-        newLi2.innerHTML = input2.value;
-        document.querySelector("ul").appendChild(newLi2);
-        input2.value = "";
-
-        let input3 = document.getElementById("date");
-        let newLi3 = document.createElement("li");
-        newLi3.innerHTML = input3.value;
-        document.querySelector("ul").appendChild(newLi3);
-        input3.value = "";
-        //createTextNode(input.value);
-
-        //   newLi.appendChild(check);
-        //   newLi.appendChild(text);
-
-        //--------------- 삭제 버튼 만들기 ------------------------
-        let deleteBtn = document.createElement("button");
-        deleteBtn.innerHTML = "삭제";
-        newLi.appendChild(deleteBtn);
-        deleteBtn.addEventListener("click", function () {
-          let ul = document.querySelector("ul");
-          ul.removeChild(newLi);
-        });
-        //--------------- 수정 버튼 만들기 ------------------------//
-        let modifyBtn = document.createElement("button");
-        modifyBtn.innerHTML = "수정";
-        newLi.appendChild(modifyBtn);
-        modifyBtn.addEventListener("click", function () {
-          let ul = document.querySelector("ul");
-          ul.modifyChild(newLi);
-        });
       }
     </script>
   </body>
